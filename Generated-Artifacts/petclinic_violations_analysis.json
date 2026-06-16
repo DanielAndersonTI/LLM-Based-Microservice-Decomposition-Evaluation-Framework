@@ -1,0 +1,514 @@
+{
+  "fewshot": {
+    "strategy": "fewshot",
+    "services": {
+      "Client Service": {
+        "responsibilities": "Add clients;Update clients;Delete clients;View client details",
+        "communicates_with": "Pet Service;Visit Service",
+        "classes": [
+          "OwnerController",
+          "OwnerRepository",
+          "Owner"
+        ]
+      },
+      "Pet Service": {
+        "responsibilities": "Add pets;Update pets;Delete pets;Link pets to owners",
+        "communicates_with": "Client Service;Visit Service",
+        "classes": [
+          "PetController",
+          "Pet",
+          "PetValidator",
+          "PetType",
+          "PetTypeRepository",
+          "PetTypeFormatter"
+        ]
+      },
+      "Visit Service": {
+        "responsibilities": "Register pet visits;View visit history",
+        "communicates_with": "Pet Service;Client Service",
+        "classes": [
+          "Visit",
+          "VisitController"
+        ]
+      },
+      "Vet Service": {
+        "responsibilities": "Add veterinarians;Update veterinarians;Delete veterinarians;View vet specialties",
+        "communicates_with": "",
+        "classes": [
+          "Specialty",
+          "VetRepository",
+          "VetController",
+          "Vet"
+        ]
+      },
+      "Discovery Service (Eureka)": {
+        "responsibilities": "Register services;Provide service discovery",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;Config Service;API Gateway;Admin Server",
+        "classes": []
+      },
+      "Config Service": {
+        "responsibilities": "Store centralized configurations;Serve configurations to services",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;API Gateway;Discovery Service;Admin Server",
+        "classes": []
+      },
+      "API Gateway": {
+        "responsibilities": "Route client requests;Handle cross-cutting concerns;Forward requests to backend services",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;Discovery Service",
+        "classes": []
+      },
+      "Admin Server": {
+        "responsibilities": "Monitor services;Provide administration dashboard",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;Discovery Service;Config Service;API Gateway",
+        "classes": []
+      }
+    },
+    "class_to_service_mapping": {
+      "Owner": "Client Service",
+      "OwnerController": "Client Service",
+      "OwnerRepository": "Client Service",
+      "Pet": "Pet Service",
+      "PetType": "Pet Service",
+      "PetController": "Pet Service",
+      "PetTypeRepository": "Pet Service",
+      "PetTypeFormatter": "Pet Service",
+      "PetValidator": "Pet Service",
+      "Visit": "Visit Service",
+      "VisitController": "Visit Service",
+      "Vet": "Vet Service",
+      "Specialty": "Vet Service",
+      "VetController": "Vet Service",
+      "VetRepository": "Vet Service"
+    },
+    "violations": [
+      {
+        "source": "Owner",
+        "target": "Pet",
+        "type": "jpa",
+        "source_service": "Client Service",
+        "target_service": "Pet Service"
+      },
+      {
+        "source": "Owner",
+        "target": "Visit",
+        "type": "jpa",
+        "source_service": "Client Service",
+        "target_service": "Visit Service"
+      },
+      {
+        "source": "Pet",
+        "target": "Visit",
+        "type": "jpa",
+        "source_service": "Pet Service",
+        "target_service": "Visit Service"
+      },
+      {
+        "source": "PetController",
+        "target": "Owner",
+        "type": "unknown",
+        "source_service": "Pet Service",
+        "target_service": "Client Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "Pet",
+        "type": "unknown",
+        "source_service": "Visit Service",
+        "target_service": "Pet Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "Owner",
+        "type": "unknown",
+        "source_service": "Visit Service",
+        "target_service": "Client Service"
+      },
+      {
+        "source": "PetController",
+        "target": "OwnerRepository",
+        "type": "injection",
+        "source_service": "Pet Service",
+        "target_service": "Client Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "OwnerRepository",
+        "type": "injection",
+        "source_service": "Visit Service",
+        "target_service": "Client Service"
+      }
+    ],
+    "consistent_edges": [
+      {
+        "source": "OwnerController",
+        "target": "Owner",
+        "type": "unknown",
+        "service": "Client Service"
+      },
+      {
+        "source": "PetController",
+        "target": "PetValidator",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetController",
+        "target": "Pet",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetController",
+        "target": "PetType",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetTypeFormatter",
+        "target": "Pet",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetTypeFormatter",
+        "target": "PetType",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetValidator",
+        "target": "Pet",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "Visit",
+        "type": "unknown",
+        "service": "Visit Service"
+      },
+      {
+        "source": "Vet",
+        "target": "Specialty",
+        "type": "jpa",
+        "service": "Vet Service"
+      },
+      {
+        "source": "VetController",
+        "target": "Vet",
+        "type": "unknown",
+        "service": "Vet Service"
+      },
+      {
+        "source": "PetTypeRepository",
+        "target": "PetType",
+        "type": "repository",
+        "service": "Pet Service"
+      },
+      {
+        "source": "OwnerRepository",
+        "target": "Owner",
+        "type": "repository",
+        "service": "Client Service"
+      },
+      {
+        "source": "VetRepository",
+        "target": "Vet",
+        "type": "repository",
+        "service": "Vet Service"
+      },
+      {
+        "source": "PetTypeFormatter",
+        "target": "PetTypeRepository",
+        "type": "injection",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetController",
+        "target": "PetTypeRepository",
+        "type": "injection",
+        "service": "Pet Service"
+      },
+      {
+        "source": "OwnerController",
+        "target": "OwnerRepository",
+        "type": "injection",
+        "service": "Client Service"
+      },
+      {
+        "source": "VetController",
+        "target": "VetRepository",
+        "type": "injection",
+        "service": "Vet Service"
+      }
+    ],
+    "metrics": {
+      "total_edges": 40,
+      "total_violations": 8,
+      "total_consistent": 17,
+      "tvd": 0.2,
+      "cb": 0.8,
+      "granularity": 8
+    }
+  },
+  "zeroshot": {
+    "strategy": "zeroshot",
+    "services": {
+      "Client Service": {
+        "responsibilities": "Add client;Update client;Delete client;View client details",
+        "communicates_with": "Pet Service;Discovery Service;Config Service;Gateway Service;Admin Service",
+        "classes": [
+          "OwnerController",
+          "OwnerRepository",
+          "Owner"
+        ]
+      },
+      "Pet Service": {
+        "responsibilities": "Add pet;Update pet;Delete pet;Link pet to owner;View pet details",
+        "communicates_with": "Client Service;Visit Service;Discovery Service;Config Service;Gateway Service;Admin Service",
+        "classes": [
+          "PetController",
+          "Pet",
+          "PetValidator",
+          "PetType",
+          "PetTypeRepository",
+          "PetTypeFormatter"
+        ]
+      },
+      "Visit Service": {
+        "responsibilities": "Register new visit;View visit history",
+        "communicates_with": "Pet Service;Discovery Service;Config Service;Gateway Service;Admin Service",
+        "classes": [
+          "Visit",
+          "VisitController"
+        ]
+      },
+      "Vet Service": {
+        "responsibilities": "Add vet;Update vet;Delete vet;View vet specialties",
+        "communicates_with": "Discovery Service;Config Service;Gateway Service;Admin Service",
+        "classes": [
+          "Specialty",
+          "VetRepository",
+          "VetController",
+          "Vet"
+        ]
+      },
+      "Discovery Service": {
+        "responsibilities": "Register services;Service registry;Locate services",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;Config Service;Gateway Service;Admin Service",
+        "classes": [
+          "PetClinicApplication"
+        ]
+      },
+      "Config Service": {
+        "responsibilities": "Centralized configuration management",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;Discovery Service;Gateway Service;Admin Service",
+        "classes": []
+      },
+      "Gateway Service": {
+        "responsibilities": "Route client requests to services;API aggregation",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;Discovery Service;Config Service;Admin Service",
+        "classes": []
+      },
+      "Admin Service": {
+        "responsibilities": "Monitor services;Administration dashboard",
+        "communicates_with": "Client Service;Pet Service;Visit Service;Vet Service;Discovery Service;Config Service;Gateway Service",
+        "classes": []
+      }
+    },
+    "class_to_service_mapping": {
+      "Owner": "Client Service",
+      "OwnerController": "Client Service",
+      "OwnerRepository": "Client Service",
+      "Pet": "Pet Service",
+      "PetType": "Pet Service",
+      "PetController": "Pet Service",
+      "PetTypeRepository": "Pet Service",
+      "PetTypeFormatter": "Pet Service",
+      "PetValidator": "Pet Service",
+      "Visit": "Visit Service",
+      "VisitController": "Visit Service",
+      "Vet": "Vet Service",
+      "Specialty": "Vet Service",
+      "VetController": "Vet Service",
+      "VetRepository": "Vet Service",
+      "PetClinicApplication": "Discovery Service"
+    },
+    "violations": [
+      {
+        "source": "Owner",
+        "target": "Pet",
+        "type": "jpa",
+        "source_service": "Client Service",
+        "target_service": "Pet Service"
+      },
+      {
+        "source": "Owner",
+        "target": "Visit",
+        "type": "jpa",
+        "source_service": "Client Service",
+        "target_service": "Visit Service"
+      },
+      {
+        "source": "Pet",
+        "target": "Visit",
+        "type": "jpa",
+        "source_service": "Pet Service",
+        "target_service": "Visit Service"
+      },
+      {
+        "source": "PetController",
+        "target": "Owner",
+        "type": "unknown",
+        "source_service": "Pet Service",
+        "target_service": "Client Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "Pet",
+        "type": "unknown",
+        "source_service": "Visit Service",
+        "target_service": "Pet Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "Owner",
+        "type": "unknown",
+        "source_service": "Visit Service",
+        "target_service": "Client Service"
+      },
+      {
+        "source": "PetClinicApplication",
+        "target": "Pet",
+        "type": "unknown",
+        "source_service": "Discovery Service",
+        "target_service": "Pet Service"
+      },
+      {
+        "source": "PetController",
+        "target": "OwnerRepository",
+        "type": "injection",
+        "source_service": "Pet Service",
+        "target_service": "Client Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "OwnerRepository",
+        "type": "injection",
+        "source_service": "Visit Service",
+        "target_service": "Client Service"
+      }
+    ],
+    "consistent_edges": [
+      {
+        "source": "OwnerController",
+        "target": "Owner",
+        "type": "unknown",
+        "service": "Client Service"
+      },
+      {
+        "source": "PetController",
+        "target": "PetValidator",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetController",
+        "target": "Pet",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetController",
+        "target": "PetType",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetTypeFormatter",
+        "target": "Pet",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetTypeFormatter",
+        "target": "PetType",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetValidator",
+        "target": "Pet",
+        "type": "unknown",
+        "service": "Pet Service"
+      },
+      {
+        "source": "VisitController",
+        "target": "Visit",
+        "type": "unknown",
+        "service": "Visit Service"
+      },
+      {
+        "source": "Vet",
+        "target": "Specialty",
+        "type": "jpa",
+        "service": "Vet Service"
+      },
+      {
+        "source": "VetController",
+        "target": "Vet",
+        "type": "unknown",
+        "service": "Vet Service"
+      },
+      {
+        "source": "PetTypeRepository",
+        "target": "PetType",
+        "type": "repository",
+        "service": "Pet Service"
+      },
+      {
+        "source": "OwnerRepository",
+        "target": "Owner",
+        "type": "repository",
+        "service": "Client Service"
+      },
+      {
+        "source": "VetRepository",
+        "target": "Vet",
+        "type": "repository",
+        "service": "Vet Service"
+      },
+      {
+        "source": "PetTypeFormatter",
+        "target": "PetTypeRepository",
+        "type": "injection",
+        "service": "Pet Service"
+      },
+      {
+        "source": "PetController",
+        "target": "PetTypeRepository",
+        "type": "injection",
+        "service": "Pet Service"
+      },
+      {
+        "source": "OwnerController",
+        "target": "OwnerRepository",
+        "type": "injection",
+        "service": "Client Service"
+      },
+      {
+        "source": "VetController",
+        "target": "VetRepository",
+        "type": "injection",
+        "service": "Vet Service"
+      }
+    ],
+    "metrics": {
+      "total_edges": 40,
+      "total_violations": 9,
+      "total_consistent": 17,
+      "tvd": 0.225,
+      "cb": 0.775,
+      "granularity": 8
+    }
+  }
+}

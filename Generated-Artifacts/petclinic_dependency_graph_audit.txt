@@ -1,0 +1,6 @@
+copy_path=project_descriptions\PetClinic\petclinic_dependency_graph.20260608185412.graphml
+csv_path=project_descriptions\PetClinic\petclinic_dependency_graph_edges.csv
+nodes=25
+edges=40
+isolated=CacheConfiguration|CrashController|WebConfiguration|WelcomeController
+degree1=PetClinicApplication

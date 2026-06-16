@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <graph edgedefault="directed">
+    <node id="BaseEntity" />
+    <node id="NamedEntity" />
+    <node id="Person" />
+    <node id="Owner" />
+    <node id="OwnerController" />
+    <node id="OwnerRepository" />
+    <node id="Pet" />
+    <node id="PetController" />
+    <node id="PetType" />
+    <node id="PetTypeFormatter" />
+    <node id="PetTypeRepository" />
+    <node id="PetValidator" />
+    <node id="Visit" />
+    <node id="VisitController" />
+    <node id="PetClinicApplication" />
+    <node id="PetClinicRuntimeHints" />
+    <node id="CacheConfiguration" />
+    <node id="CrashController" />
+    <node id="WebConfiguration" />
+    <node id="WelcomeController" />
+    <node id="Specialty" />
+    <node id="Vet" />
+    <node id="VetController" />
+    <node id="VetRepository" />
+    <node id="Vets" />
+    <edge source="NamedEntity" target="BaseEntity" />
+    <edge source="Person" target="BaseEntity" />
+    <edge source="Owner" target="Person" />
+    <edge source="Owner" target="Pet" />
+    <edge source="Owner" target="Visit" />
+    <edge source="OwnerController" target="Owner" />
+    <edge source="Pet" target="NamedEntity" />
+    <edge source="Pet" target="Visit" />
+    <edge source="PetController" target="PetValidator" />
+    <edge source="PetController" target="Pet" />
+    <edge source="PetController" target="PetType" />
+    <edge source="PetController" target="Owner" />
+    <edge source="PetType" target="NamedEntity" />
+    <edge source="PetTypeFormatter" target="Pet" />
+    <edge source="PetTypeFormatter" target="PetType" />
+    <edge source="PetValidator" target="Pet" />
+    <edge source="Visit" target="BaseEntity" />
+    <edge source="VisitController" target="Pet" />
+    <edge source="VisitController" target="Owner" />
+    <edge source="VisitController" target="Visit" />
+    <edge source="PetClinicApplication" target="Pet" />
+    <edge source="PetClinicRuntimeHints" target="BaseEntity" />
+    <edge source="PetClinicRuntimeHints" target="Person" />
+    <edge source="PetClinicRuntimeHints" target="Vet" />
+    <edge source="Specialty" target="NamedEntity" />
+    <edge source="Vet" target="Person" />
+    <edge source="Vet" target="NamedEntity" />
+    <edge source="Vet" target="Specialty" />
+    <edge source="VetController" target="Vets" />
+    <edge source="VetController" target="Vet" />
+    <edge source="PetTypeRepository" target="PetType" />
+    <edge source="OwnerRepository" target="Owner" />
+    <edge source="VetRepository" target="Vet" />
+    <edge source="PetTypeFormatter" target="PetTypeRepository" />
+    <edge source="PetController" target="OwnerRepository" />
+    <edge source="PetController" target="PetTypeRepository" />
+    <edge source="OwnerController" target="OwnerRepository" />
+    <edge source="VisitController" target="OwnerRepository" />
+    <edge source="VetController" target="VetRepository" />
+    <edge source="Vets" target="Vet" />
+  </graph>
+</graphml>
