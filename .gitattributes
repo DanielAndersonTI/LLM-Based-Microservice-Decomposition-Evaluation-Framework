@@ -1,0 +1,3 @@
+# PetClinic is the subject system used as experimental input (third-party),
+# not part of this repository's own code.
+PetClinic/** linguist-vendored
